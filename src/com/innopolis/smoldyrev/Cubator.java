@@ -23,7 +23,6 @@ public class Cubator extends Thread {
                 array) {
             sum += dig * dig * dig;
         }
-
         Consumer.met(sum,0,0, this);
     }
 }

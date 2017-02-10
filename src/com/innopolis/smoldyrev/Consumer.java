@@ -11,11 +11,16 @@ public class Consumer {
 
     private volatile static int summa = 0;
 
+    public static int getSumma() {
+        return summa;
+    }
+
     public static void met(int kube, int kvadro, int simple, Object obj) {
 
         while (semaphKube && obj instanceof Cubator) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(100);
+                //System.out.println("waiting cube");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -23,7 +28,8 @@ public class Consumer {
 
         while (semaphKvadro && obj instanceof Kvadrator) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(100);
+                //System.out.println("waiting kva");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -31,21 +37,24 @@ public class Consumer {
 
         while (semaphProst && obj instanceof Prostator) {
             try {
-                Thread.sleep(500);
+                Thread.sleep(100);
+                //System.out.println("waiting prosto");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        if (obj instanceof Prostator) semaphProst = true;
-        if (obj instanceof Kvadrator) semaphKvadro = true;
-        if (obj instanceof Cubator) semaphKube = true;
+        semaphProst = (obj instanceof Prostator);
+        semaphKvadro = (obj instanceof Kvadrator);
+        semaphKube = (obj instanceof Cubator);
 
-        summa = summa+ kube+kvadro+simple;
+        summa += kube+kvadro+simple;
+
         System.out.println(summa);
 
-        if (obj instanceof Prostator) semaphProst = false;
-        if (obj instanceof Kvadrator) semaphKvadro = false;
-        if (obj instanceof Cubator) semaphKube = false;
+        semaphProst = !(obj instanceof Prostator);
+        semaphKvadro = !(obj instanceof Kvadrator);
+        semaphKube = !(obj instanceof Cubator);
+
     }
 }

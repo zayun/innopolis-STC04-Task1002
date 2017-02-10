@@ -22,7 +22,6 @@ public class Prostator extends Thread{
                 array) {
             sum+=dig;
         }
-
         Consumer.met(0,0,sum, this);
     }
 }
