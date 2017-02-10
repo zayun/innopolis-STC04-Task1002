@@ -55,8 +55,8 @@ public class Main {
         }
 
 
-        System.out.println("===================");
-        System.out.println(Consumer.getSumma());
+//        System.out.println("===================");
+//        System.out.println(Consumer.getSumma());
 
     }
 }
